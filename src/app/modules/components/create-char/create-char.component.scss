@@ -1,0 +1,48 @@
+@import 'fonts.scss';
+@import 'images.scss';
+.wrapper{
+  background-color: #FFFFFF;
+  .image{
+    width: 500px;
+    height: 500px;
+    background-image: $img-human;
+    background-size: cover;
+    overflow: hidden;
+  }
+  .choice-panel{
+    width: 414px;
+    height: 263px;
+    background: #FFF9F9;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
+    .paragraph-container{
+      padding: 23px 55px 22px 22px;
+      p{
+        font-family: Roboto-Light, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 28px;
+        color: #716868;
+        margin: 0;
+        padding: 0;
+        strong{
+          font-weight: 700;
+        }
+      }
+    }
+    .character-menu{
+      .item-wrapper{
+        padding: 0 282px 22px 24px;
+        label{
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          color: #716868;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
