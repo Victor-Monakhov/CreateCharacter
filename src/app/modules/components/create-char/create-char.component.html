@@ -1,22 +1,72 @@
 <div class="wrapper">
-  <div class="image"></div>
-  <div class="choice-panel">
+  <div *ngIf="!characterService.firstMessage;" class="message">
+    <p class="top-p">The first:</p>
+    <p class="bold-p">Race</p>
+    <p class="bottom-p">Everyone is crazy about it now...</p>
+    <button (click)="onFirstMessage()">Got it</button>
+  </div>
+  <img class="image"
+       src="../../assets/images/{{characterService.images.get(characterService.race + characterService.type)}}"
+       [ngStyle]="characterService.race === 'Human' ? {'margin-left': '-5px'} : {'margin-left': '-20px'}"
+       alt="character">
+  <div *ngIf="characterService.isRaceStep; else type" class="choice-panel">
     <div class="paragraph-container">
       <p>Chose a <strong>race</strong> from the options:</p>
     </div>
     <div class="character-menu">
-      <div class="item-wrapper">
-        <input type="radio" id="item1">
-        <label for="item1">Human</label>
+      <div *ngFor="let item of characterService.races" class="item-wrapper">
+        <input [disabled]="!characterService.firstMessage"
+               [checked]="characterService.race === item"
+               type="radio"
+               name="{{item}}"
+               id="{{item}}"
+               (click)="onRace(item)">
+        <label [for]="item">{{item}}</label>
       </div>
-      <div class="item-wrapper">
-        <input type="radio"  id="item2">
-        <label for="item3">Elf</label>
-      </div>
-      <div class="item-wrapper">
-        <input type="radio"  id="item3">
-        <label for="item3">Dwarf</label>
+      <div class="next-btn-wrapper">
+        <button [disabled]="!characterService.firstMessage" class="next-btn" (click)="onStep(true)">
+          <p>Next</p>
+          <div class="arrow right"></div>
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+
+
+<ng-template #type>
+  <div *ngIf="!characterService.secondMessage" class="message">
+    <p class="top-p">The second:</p>
+    <p class="bold-p">Class</p>
+    <p class="bottom-p">Second but not least...</p>
+    <button (click)="onSecondMessage()">Got it</button>
+  </div>
+  <div class="choice-panel">
+    <div class="paragraph-container">
+      <p>Chose a <strong>class</strong> from the options:</p>
+    </div>
+    <div class="character-menu">
+      <div *ngFor="let item of characterService.types" class="item-wrapper">
+        <input [disabled]="!characterService.secondMessage"
+               [checked]="characterService.type === item"
+               type="radio"
+               name="{{item}}"
+               id="{{item}}"
+               (click)="onType(item)">
+        <label for="{{item}}">{{item}}</label>
+      </div>
+      <div class="next-back-btn-wrapper">
+        <button [disabled]="!characterService.secondMessage" class="next-btn" (click)="onStep(false)">
+          <div class="arrow left"></div>
+          <p>Back</p>
+        </button>
+        <button [disabled]="!characterService.secondMessage" class="next-btn" (click)="onStep(true)">
+          <p>Next</p>
+          <div class="arrow right"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
