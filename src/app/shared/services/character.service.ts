@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {map, Observable, of, switchMap} from "rxjs";
+import {Params} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -8,29 +10,23 @@ export class CharacterService {
   public images: Map<string, string> = new Map();
   public races: string[] = ['Human', 'Elf', 'Dwarf'];
   public types: string[] = ['Warrior', 'Dude with bow', 'Mage'];
-  public isRaceStep: boolean = true;
-  public isTypeStep: boolean = false;
   public firstMessage: boolean;
   public secondMessage: boolean;
+  public thirdMessage: boolean;
   public race: string;
   public type: string;
-  public  readonly isRaceStepKey: string = 'isRaceStep';
-  public  readonly isTypeStepKey: string = 'isTypeStep';
   public readonly firstMessageKey: string = 'firstMessage';
   public readonly secondMessageKey: string = 'secondMessage';
+  public readonly thirdMessageKey: string = 'thirdMessage';
   public readonly raceKey: string = 'race';
   public readonly typeKey: string = 'type';
 
 
   constructor() {
     this.imagesInit();
-    this.isRaceStep = !!JSON.parse(window.localStorage.getItem(this.isRaceStepKey) as string);
-    this.isTypeStep = !!JSON.parse(window.localStorage.getItem(this.isTypeStepKey) as string);
-    if(!this.isRaceStep && !this.isTypeStep){
-      this.isRaceStep = true;
-    }
     this.firstMessage = !!JSON.parse(window.localStorage.getItem(this.firstMessageKey) as string);
     this.secondMessage = !!JSON.parse(window.localStorage.getItem(this.secondMessageKey) as string);
+    this.thirdMessage = !!JSON.parse(window.localStorage.getItem(this.thirdMessageKey) as string);
     this.race = JSON.parse(window.localStorage.getItem(this.raceKey) as string) ?? 'Human';
     this.type = JSON.parse(window.localStorage.getItem(this.typeKey) as string) ?? '';
   }
@@ -62,6 +58,12 @@ export class CharacterService {
     window.localStorage.setItem(this.secondMessageKey, JSON.stringify(this.secondMessage));
   }
 
+  public updateThirdMessage(){
+    this.thirdMessage = true;
+    window.localStorage.removeItem(this.thirdMessageKey);
+    window.localStorage.setItem(this.thirdMessageKey, JSON.stringify(this.thirdMessage));
+  }
+
   public updateRace(race: string){
     this.race = race;
     window.localStorage.removeItem(this.raceKey);
@@ -72,21 +74,6 @@ export class CharacterService {
     this.type = type;
     window.localStorage.removeItem(this.typeKey);
     window.localStorage.setItem(this.typeKey, JSON.stringify(this.type));
-  }
-
-  public updateStep(stepDirection: boolean){
-    if(this.isRaceStep){
-      this.isRaceStep = false;
-      this.isTypeStep = true;
-      this.updateType('Warrior');
-      return;
-    }
-    if(this.isTypeStep && !stepDirection){
-      this.isTypeStep = false;
-      this.isRaceStep = true;
-      this.updateType('');
-      return;
-    }
   }
 
 }

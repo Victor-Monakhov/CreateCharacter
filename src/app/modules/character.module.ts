@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StartComponent } from './components/start/start.component';
 import {CreateCharComponent} from "./components/create-char/create-char.component";
 import {CharacterRoutingModule} from "./character-routing.module";
+import {ColorPickerModule} from "ngx-color-picker";
 
 
 
@@ -14,6 +15,7 @@ import {CharacterRoutingModule} from "./character-routing.module";
   imports: [
     CommonModule,
     CharacterRoutingModule,
+    ColorPickerModule
   ]
 })
 export class CharacterModule { }

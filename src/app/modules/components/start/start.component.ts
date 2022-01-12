@@ -15,6 +15,6 @@ export class StartComponent implements OnInit {
   }
 
   public onStart(){
-    this.router.navigate(['/creating']);
+    this.router.navigate(['/creating'], {queryParams: {page: 'race'}});
   }
 }

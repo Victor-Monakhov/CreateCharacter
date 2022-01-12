@@ -12,6 +12,19 @@
     line-height: 28px;
     color: #716868;
   }
+  button {
+    width: 90px;
+    height: 36px;
+    background: #93C2ED;
+    border: 0 solid transparent;
+    padding: 4px 5px 4px 5px;
+
+    p {
+      display: inline;
+      margin: 0 6px 0 6px;
+      color: #FFFFFF;
+    }
+  }
   .image{
     width: 500px;
     height: 500px;
@@ -39,6 +52,10 @@
     .bottom-p{
       margin-bottom: 9px;
     }
+    .third-bottom-p{
+      margin: 0 177px 0 22px;
+      padding: 10px 0 0 0;
+    }
     button{
       width: 90px;
       height: 36px;
@@ -50,8 +67,16 @@
       color: #FFFFFF;
       margin: 0 14px 14px 310px;
     }
+    .third-msg-btn{
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      margin: 0;
+    }
   }
   .choice-panel{
+    position: fixed;
+    top: 473px;
     width: 414px;
     height: 263px;
     background-color: #FFF9F9;
@@ -88,17 +113,7 @@
         padding: 0 14px 12px 14px;
         justify-content: space-between;
       }
-      .next-btn{
-        width: 90px;
-        height: 36px;
-        background: #93C2ED;
-        border: 0 solid transparent;
-        padding: 4px 5px 4px 5px;
-        p{
-          display: inline;
-          margin: 0 6px 0 6px;
-          color: #FFFFFF;
-        }
+      button{
         .arrow{
           display: inline-block;
           width: 16px;
@@ -111,6 +126,56 @@
           background-image: $arrow-left;
         }
       }
+    }
+  }
+
+  .color-panel{
+    position: fixed;
+    top: 344px;
+    width: 414px;
+    height: 392px;
+    background-color: #FFF9F9;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
+    .paragraph-container{
+      padding: 25px 0 14px 22px;
+      p{
+        font-weight: 300;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .color-menu{
+      .themes{
+        display: flex;
+        padding: 0 141px 14px 22px;
+        justify-content: space-between;
+        label{
+          font-family: Roboto-Light, sans-serif;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 28px;
+          color: #716868;
+          margin-left: 5px;
+        }
+      }
+      p{
+        margin: 0;
+        padding: 0 0 190px 22px;
+      }
+      .save-btn-wrapper{
+        padding: 0 270px 29px 55px;
+        button{
+            background-image: $save_btn;
+        }
+      }
+    }
+    .color-picker{
+      position: absolute;
+      top: 113px;
+      right: 30px;
+      bottom: 22px;
+      left: 193px;
     }
   }
 }

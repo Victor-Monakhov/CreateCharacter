@@ -1,30 +1,34 @@
 <div class="wrapper">
-  <div *ngIf="!characterService.firstMessage;" class="message">
-    <p class="top-p">The first:</p>
-    <p class="bold-p">Race</p>
-    <p class="bottom-p">Everyone is crazy about it now...</p>
-    <button (click)="onFirstMessage()">Got it</button>
-  </div>
+  <ng-container *ngIf="(page === pages[0] && !message)">
+    <ng-container *ngTemplateOutlet="firstMessage"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="(page === pages[1] && !message)">
+    <ng-container *ngTemplateOutlet="secondMessage"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="(page === pages[2] && !message)">
+    <ng-container *ngTemplateOutlet="thirdMessage"></ng-container>
+  </ng-container>
   <img class="image"
-       src="../../assets/images/{{characterService.images.get(characterService.race + characterService.type)}}"
-       [ngStyle]="characterService.race === 'Human' ? {'margin-left': '-5px'} : {'margin-left': '-20px'}"
-       alt="character">
-  <div *ngIf="characterService.isRaceStep; else type" class="choice-panel">
+       src="../../assets/images/{{images.get(race + type)}}"
+       alt="character"
+       [style.background]="color"
+       [ngStyle]="race === 'Human' ? {'margin-left': '-5px'} : {'margin-left': '-20px'}">
+  <div *ngIf="page !== pages[2]; else colorPanel" class="choice-panel">
     <div class="paragraph-container">
-      <p>Chose a <strong>race</strong> from the options:</p>
+      <p>Chose a <strong>{{page}}</strong> from the options:</p>
     </div>
     <div class="character-menu">
-      <div *ngFor="let item of characterService.races" class="item-wrapper">
-        <input [disabled]="!characterService.firstMessage"
-               [checked]="characterService.race === item"
-               type="radio"
-               name="{{item}}"
-               id="{{item}}"
-               (click)="onRace(item)">
+      <div *ngFor="let item of choices" class="item-wrapper">
+        <input type="radio"
+               [disabled]="!message"
+               [checked]="charData === item"
+               [name]="item"
+               [id]="item"
+               (click)="onRadio(item)">
         <label [for]="item">{{item}}</label>
       </div>
-      <div class="next-btn-wrapper">
-        <button [disabled]="!characterService.firstMessage" class="next-btn" (click)="onStep(true)">
+      <div *ngIf="page === pages[0]; else navButtons" class="next-btn-wrapper">
+        <button [disabled]="!message" (click)="onStep(true)">
           <p>Next</p>
           <div class="arrow right"></div>
         </button>
@@ -34,39 +38,87 @@
 </div>
 
 
+<ng-template #colorPanel>
+  <div class="color-panel">
+    <div class="paragraph-container">
+      <p>Theme:</p>
+    </div>
+    <div class="color-menu">
+      <div class="themes">
+        <div class="theme-day">
+          <input type="radio"
+                 name="day"
+                 id="day"
+                 [disabled]="!message"
+                 [checked]="false"
+                 (click)="onTheme('day')">
+          <label for="day">Day</label>
+        </div>
+        <div class="theme-night">
+          <input type="radio"
+                 name="night"
+                 id="night"
+                 [disabled]="!message"
+                 [checked]="false"
+                 (click)="onTheme('night')">
+          <label for="night">Night</label>
+        </div>
+      </div>
+      <p>Background:</p>
+      <div class="save-btn-wrapper">
+        <button [disabled]="!message" (click)="onStep(true)"></button>
+      </div>
+    </div>
+    <input class="color-picker"
+           [cpWidth]="'191px'"
+           [cpHeight]="'257px'"
+           [cpDisableInput]="true"
+           [cpToggle] = "true"
+           [cpPosition] = "'top-left'"
+           [cpPositionOffset]="'50%'"
+           [cpCloseClickOutside]="false"
+           [cpPositionRelativeToArrow] = "false"
+           [cpUseRootViewContainer]="true"
+           [(colorPicker)]="color">
+  </div>
+</ng-template>
 
-<ng-template #type>
-  <div *ngIf="!characterService.secondMessage" class="message">
+<ng-template #firstMessage>
+  <div class="message">
+    <p class="top-p">The first:</p>
+    <p class="bold-p">Race</p>
+    <p class="bottom-p">Everyone is crazy about it now...</p>
+    <button (click)="onFirstMessage()">Got it</button>
+  </div>
+</ng-template>
+
+<ng-template #secondMessage>
+  <div class="message">
     <p class="top-p">The second:</p>
     <p class="bold-p">Class</p>
     <p class="bottom-p">Second but not least...</p>
     <button (click)="onSecondMessage()">Got it</button>
   </div>
-  <div class="choice-panel">
-    <div class="paragraph-container">
-      <p>Chose a <strong>class</strong> from the options:</p>
-    </div>
-    <div class="character-menu">
-      <div *ngFor="let item of characterService.types" class="item-wrapper">
-        <input [disabled]="!characterService.secondMessage"
-               [checked]="characterService.type === item"
-               type="radio"
-               name="{{item}}"
-               id="{{item}}"
-               (click)="onType(item)">
-        <label for="{{item}}">{{item}}</label>
-      </div>
-      <div class="next-back-btn-wrapper">
-        <button [disabled]="!characterService.secondMessage" class="next-btn" (click)="onStep(false)">
-          <div class="arrow left"></div>
-          <p>Back</p>
-        </button>
-        <button [disabled]="!characterService.secondMessage" class="next-btn" (click)="onStep(true)">
-          <p>Next</p>
-          <div class="arrow right"></div>
-        </button>
-      </div>
-    </div>
+</ng-template>
+
+<ng-template #thirdMessage>
+  <div class="message">
+    <p class="top-p">Okay, glad we both chose a {{type.toLowerCase()}} {{race.toLowerCase()}}:3</p>
+    <p class="third-bottom-p">Left a little <br> just choose <strong>settings</strong></p>
+    <button  class="third-msg-btn" (click)="onThirdMessage()">Got it</button>
+  </div>
+</ng-template>
+
+<ng-template #navButtons>
+  <div class="next-back-btn-wrapper">
+    <button [disabled]="!message" (click)="onStep(false)">
+      <div class="arrow left"></div>
+      <p>Back</p>
+    </button>
+    <button [disabled]="!message"  (click)="onStep(true)">
+      <p>Next</p>
+      <div class="arrow right"></div>
+    </button>
   </div>
 </ng-template>
 
