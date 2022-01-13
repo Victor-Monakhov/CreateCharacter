@@ -1,10 +1,12 @@
 @import 'fonts.scss';
 @import 'images.scss';
 @import 'icons.scss';
-.wrapper{
+
+.wrapper {
   background-color: #FFFFFF;
   overflow: hidden;
-  p{
+
+  p {
     font-family: Roboto-Light, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -12,6 +14,7 @@
     line-height: 28px;
     color: #716868;
   }
+
   button {
     width: 90px;
     height: 36px;
@@ -25,13 +28,15 @@
       color: #FFFFFF;
     }
   }
-  .image{
+
+  .image {
     width: 500px;
     height: 500px;
     margin-top: -27px;
     background-color: #FFFFFF;
   }
-  .message{
+
+  .message {
     position: absolute;
     width: 414px;
     height: 177px;
@@ -40,23 +45,29 @@
     background: #FFF9F9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     font-weight: 300;
-    p{
+
+    p {
       margin: 0 0 13px 22px;
     }
-    .bold-p{
+
+    .bold-p {
       font-weight: bold;
     }
-    .top-p{
+
+    .top-p {
       margin-top: 11px;
     }
-    .bottom-p{
+
+    .bottom-p {
       margin-bottom: 9px;
     }
-    .third-bottom-p{
+
+    .third-bottom-p {
       margin: 0 177px 0 22px;
       padding: 10px 0 0 0;
     }
-    button{
+
+    button {
       width: 90px;
       height: 36px;
       background: #93C2ED;
@@ -67,35 +78,42 @@
       color: #FFFFFF;
       margin: 0 14px 14px 310px;
     }
-    .third-msg-btn{
+
+    .third-msg-btn {
       position: absolute;
       bottom: 14px;
       right: 14px;
       margin: 0;
     }
   }
-  .choice-panel{
+
+  .choice-panel {
     position: fixed;
     top: 473px;
     width: 414px;
     height: 263px;
     background-color: #FFF9F9;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
-    .paragraph-container{
+
+    .paragraph-container {
       padding: 22px 55px 22px 22px;
-      p{
+
+      p {
         font-weight: 300;
         margin: 0;
         padding: 0;
-        strong{
+
+        strong {
           font-weight: 700;
         }
       }
     }
-    .character-menu{
-      .item-wrapper{
+
+    .character-menu {
+      .item-wrapper {
         padding: 0 0 19px 24px;
-        label{
+
+        label {
           font-family: Roboto-Light, sans-serif;
           font-style: normal;
           font-weight: normal;
@@ -105,77 +123,136 @@
           margin-left: 5px;
         }
       }
-      .next-btn-wrapper{
+
+      .next-btn-wrapper {
         padding: 0 14px 12px 310px;
       }
-      .next-back-btn-wrapper{
+
+      .next-back-btn-wrapper {
         display: flex;
         padding: 0 14px 12px 14px;
         justify-content: space-between;
       }
-      button{
-        .arrow{
+
+      button {
+        .arrow {
           display: inline-block;
           width: 16px;
           height: 16px;
         }
-        .right{
+
+        .right {
           background-image: $arrow-right;
         }
-        .left{
+
+        .left {
           background-image: $arrow-left;
         }
       }
     }
   }
 
-  .color-panel{
+  .color-panel {
+    display: inline-block;
     position: fixed;
     top: 344px;
-    width: 414px;
+    width: 370px;
     height: 392px;
     background-color: #FFF9F9;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
-    .paragraph-container{
-      padding: 25px 0 14px 22px;
-      p{
-        font-weight: 300;
-        margin: 0;
-        padding: 0;
+    padding: 22px;
+
+    .theme-p {
+      font-weight: 300;
+      margin: 0 0 14px 0;
+      padding: 0;
+    }
+
+    .themes {
+      display: flex;
+      margin: 0 141px 14px 0;
+      justify-content: space-between;
+
+      label {
+        font-family: Roboto-Light, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        color: #716868;
+        margin-left: 5px;
       }
     }
-    .color-menu{
-      .themes{
+
+    .color-menu {
+      .background {
         display: flex;
-        padding: 0 141px 14px 22px;
         justify-content: space-between;
-        label{
-          font-family: Roboto-Light, sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          line-height: 28px;
-          color: #716868;
-          margin-left: 5px;
+
+        .save-p {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          p {
+            margin: 0;
+          }
+
+          .save-btn-wrapper {
+            margin: 190px 0 5px 32px;
+
+            button {
+              background-image: $save_btn;
+            }
+          }
+        }
+
+        .color-picker {
+          visibility: hidden;
         }
       }
-      p{
-        margin: 0;
-        padding: 0 0 190px 22px;
-      }
-      .save-btn-wrapper{
-        padding: 0 270px 29px 55px;
-        button{
-            background-image: $save_btn;
-        }
-      }
-    }
-    .color-picker{
-      position: absolute;
-      top: 113px;
-      right: 30px;
-      bottom: 22px;
-      left: 193px;
     }
   }
 }
+
+.radio-day, .radio-night {
+  position: relative;
+  height: 16px;
+  width: 16px;
+}
+
+.radio-day::before, .radio-night::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  border: 2px solid #716868;
+}
+
+.radio-day:checked::after, .radio-night:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #716868;
+  transform: translate(-50%, -50%);
+  visibility: visible;
+}
+
+.radio-night::before {
+  background-color: #0C0C08;
+  border: 2px solid #FFFFFF;
+}
+
+.radio-night:checked::after {
+  background-color: #FFFFFF;
+}
+

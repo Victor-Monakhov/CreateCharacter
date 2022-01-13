@@ -4,13 +4,15 @@ import { StartComponent } from './components/start/start.component';
 import {CreateCharComponent} from "./components/create-char/create-char.component";
 import {CharacterRoutingModule} from "./character-routing.module";
 import {ColorPickerModule} from "ngx-color-picker";
+import { FinishComponent } from './components/finish/finish.component';
 
 
 
 @NgModule({
   declarations: [
     StartComponent,
-    CreateCharComponent
+    CreateCharComponent,
+    FinishComponent
   ],
   imports: [
     CommonModule,

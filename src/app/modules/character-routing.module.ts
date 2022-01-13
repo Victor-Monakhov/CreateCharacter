@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {CreateCharComponent} from "./components/create-char/create-char.component";
 import {StartComponent} from "./components/start/start.component";
+import {FinishComponent} from "./components/finish/finish.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'creating',
     component: CreateCharComponent
+  },
+  {
+    path: 'finish',
+    component: FinishComponent
   }
   ];
 
@@ -20,4 +25,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CharacterRoutingModule { }
+
+export class CharacterRoutingModule {}

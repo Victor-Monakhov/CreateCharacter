@@ -1,0 +1,47 @@
+@import "fonts.scss";
+.wrapper{
+  background-color: #FFFFFF;
+  hr{
+    margin: 0;
+    width: 275px;
+    height: 0;
+    border: 1px solid #93C2ED;
+  }
+  p{
+    color: #716868;
+    font-family: Roboto-Light, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hr-wrapper{
+    margin: 46px 69px 0 70px;
+  }
+  .p-wrapper{
+    margin: 67px 44px 69px 37px;
+    p{
+      margin-bottom: 30px;
+    }
+  }
+  .btn-wrapper{
+    margin: 58px 99px 101px 98px;
+    .finish-btn{
+      width: 217px;
+      height: 75px;
+      background-color: #93C2ED;
+      padding: 16px 38px 17px 39px;
+      border: 0 solid transparent;
+      p{
+        font-weight: normal;
+        font-size: 36px;
+        line-height: 42px;
+        color: #FFFFFF;
+        white-space: nowrap;
+      }
+    }
+  }
+}

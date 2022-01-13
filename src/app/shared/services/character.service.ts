@@ -13,11 +13,13 @@ export class CharacterService {
   public firstMessage: boolean;
   public secondMessage: boolean;
   public thirdMessage: boolean;
+  public theme: string;
   public race: string;
   public type: string;
   public readonly firstMessageKey: string = 'firstMessage';
   public readonly secondMessageKey: string = 'secondMessage';
   public readonly thirdMessageKey: string = 'thirdMessage';
+  public readonly themeKey: string = 'theme';
   public readonly raceKey: string = 'race';
   public readonly typeKey: string = 'type';
 
@@ -29,6 +31,7 @@ export class CharacterService {
     this.thirdMessage = !!JSON.parse(window.localStorage.getItem(this.thirdMessageKey) as string);
     this.race = JSON.parse(window.localStorage.getItem(this.raceKey) as string) ?? 'Human';
     this.type = JSON.parse(window.localStorage.getItem(this.typeKey) as string) ?? '';
+    this.theme = JSON.parse(window.localStorage.getItem(this.themeKey) as string) ?? "Day";
   }
 
   private imagesInit(){
@@ -64,6 +67,12 @@ export class CharacterService {
     window.localStorage.setItem(this.thirdMessageKey, JSON.stringify(this.thirdMessage));
   }
 
+  public updateTheme(theme: string){
+    this.theme = theme;
+    window.localStorage.removeItem(this.themeKey);
+    window.localStorage.setItem(this.themeKey, JSON.stringify(this.theme));
+  }
+
   public updateRace(race: string){
     this.race = race;
     window.localStorage.removeItem(this.raceKey);
@@ -75,5 +84,4 @@ export class CharacterService {
     window.localStorage.removeItem(this.typeKey);
     window.localStorage.setItem(this.typeKey, JSON.stringify(this.type));
   }
-
 }

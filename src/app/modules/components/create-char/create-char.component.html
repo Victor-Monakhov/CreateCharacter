@@ -11,21 +11,30 @@
   <img class="image"
        src="../../assets/images/{{images.get(race + type)}}"
        alt="character"
-       [style.background]="color"
+       [style.background]="charBackground"
        [ngStyle]="race === 'Human' ? {'margin-left': '-5px'} : {'margin-left': '-20px'}">
-  <div *ngIf="page !== pages[2]; else colorPanel" class="choice-panel">
+  <div *ngIf="page !== pages[2]; else colorPanel"
+       class="choice-panel"
+       [ngStyle]="theme === 'Day' ? {'background-color': dayBackground} : {'background-color': nightBackground}">
     <div class="paragraph-container">
-      <p>Chose a <strong>{{page}}</strong> from the options:</p>
+      <p
+        [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+        Chose a <strong>{{page}}</strong> from the options:
+      </p>
     </div>
     <div class="character-menu">
       <div *ngFor="let item of choices" class="item-wrapper">
         <input type="radio"
+               [ngClass]="theme === 'Day' ? 'radio-day' : 'radio-night'"
                [disabled]="!message"
                [checked]="charData === item"
                [name]="item"
                [id]="item"
                (click)="onRadio(item)">
-        <label [for]="item">{{item}}</label>
+        <label [for]="item"
+               [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+          {{item}}
+        </label>
       </div>
       <div *ngIf="page === pages[0]; else navButtons" class="next-btn-wrapper">
         <button [disabled]="!message" (click)="onStep(true)">
@@ -39,47 +48,47 @@
 
 
 <ng-template #colorPanel>
-  <div class="color-panel">
-    <div class="paragraph-container">
-      <p>Theme:</p>
+  <div class="color-panel"
+       [ngStyle]="theme === 'Day' ? {'background-color': dayBackground} : {'background-color': nightBackground}">
+    <p class="theme-p"
+       [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+      Theme:
+    </p>
+    <div class="themes">
+      <div class="theme-day" *ngFor="let item of themes">
+        <input type="radio"
+               [ngClass]="theme === 'Day' ? 'radio-day' : 'radio-night'"
+               [name]="item"
+               [id]="item"
+               [disabled]="!message"
+               [checked]="item === theme"
+               (click)="onTheme(item)">
+        <label [for]="item"
+               [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+          {{item}}
+        </label>
+      </div>
     </div>
     <div class="color-menu">
-      <div class="themes">
-        <div class="theme-day">
-          <input type="radio"
-                 name="day"
-                 id="day"
-                 [disabled]="!message"
-                 [checked]="false"
-                 (click)="onTheme('day')">
-          <label for="day">Day</label>
+      <div class="background">
+        <div class="save-p">
+          <p [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">Background:</p>
+          <div class="save-btn-wrapper">
+            <button [disabled]="!message" (click)="onStep(true)"></button>
+          </div>
         </div>
-        <div class="theme-night">
-          <input type="radio"
-                 name="night"
-                 id="night"
-                 [disabled]="!message"
-                 [checked]="false"
-                 (click)="onTheme('night')">
-          <label for="night">Night</label>
+        <div class="color-picker"
+               [cpWidth]="'191px'"
+               [cpHeight]="'257px'"
+               [cpDisableInput]="true"
+               [cpToggle] = "true"
+               [cpAlphaChannel]="'disabled'"
+               [cpDialogDisplay]="'inline'"
+               [cpCloseClickOutside]="false"
+               [(colorPicker)]="charBackground">
         </div>
-      </div>
-      <p>Background:</p>
-      <div class="save-btn-wrapper">
-        <button [disabled]="!message" (click)="onStep(true)"></button>
       </div>
     </div>
-    <input class="color-picker"
-           [cpWidth]="'191px'"
-           [cpHeight]="'257px'"
-           [cpDisableInput]="true"
-           [cpToggle] = "true"
-           [cpPosition] = "'top-left'"
-           [cpPositionOffset]="'50%'"
-           [cpCloseClickOutside]="false"
-           [cpPositionRelativeToArrow] = "false"
-           [cpUseRootViewContainer]="true"
-           [(colorPicker)]="color">
   </div>
 </ng-template>
 

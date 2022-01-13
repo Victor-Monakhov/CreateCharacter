@@ -1,37 +1,82 @@
+@import "icons.scss";
 body{
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-input[type='radio'] {
-  position: relative;
-  height: 16px;
-  width: 16px;
+.logo{
+  margin: 6px 41px 0 41px;
+  h1 {
+    width: 332px;
+    height: 89px;
+    color: #93C2ED;
+    font-family: WaitingfortheSunrise-Regular, sans-serif;
+    font-size: 80px;
+    font-weight: 300;
+    white-space: nowrap;
+    padding: 0;
+    font-style: normal;
+    line-height: 132px;
+    margin: 0;
+  }
 }
 
-input[type='radio']::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FFFFFF;
-  border: 2px solid #716868;
-}
 
-input[type='radio']:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #716868;
-  transform: translate(-50%, -50%);
-  visibility: visible;
+color-picker {
+  .color-picker{
+    border: 0 solid transparent;
+    .saturation-lightness{
+      display: inline-block;
+      //height: 217px;
+      .cursor{
+        border-color: #FFFFFF;
+        height: 12px;
+        width: 12px;
+      }
+    }
+    .selected-color-background, .selected-color{
+      display: none;
+    }
+    .hue-alpha{
+      position: absolute;
+      margin: 0;
+      padding: 2px;
+      top: 217px;
+      .left>div{
+        display: none;
+      }
+      .left{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        width: 14px;
+        height: 15px;
+        margin: 21px 20px 1px 4px;
+        background-image: $eye-dropper;
+        background-size: cover;
+        padding: 0;
+      }
+      .right>div:first-child{
+        display: none;
+      }
+      .right{
+        display: flex;
+        align-items: center;
+        height: 36px;
+        width: 147px;
+        padding: 0;
+        .hue{
+          margin: 0;
+          height: 12px;
+          border-radius: 10px;
+          .cursor{
+            border-color: #FFFFFF;
+            height: 12px;
+            width: 12px;
+          }
+        }
+      }
+    }
+  }
 }

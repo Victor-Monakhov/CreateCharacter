@@ -17,7 +17,14 @@ export class CreateCharComponent implements OnInit{
   public race: string = 'Human';
   public type: string = ''
   public readonly pages: string[] = ['race', 'class', 'color'];
-  public color: string = '#FFFFF';
+  public themes: string[] = ['Day', 'Night'];
+  public theme: string = 'Day';
+  public charBackground: string = '#FFFFFF';
+  public dayBackground: string = '#FFF9F9';
+  public nightBackground: string = '#0C0C08';
+  public dayFont: string = '#716868';
+  public nightFont: string = '#FFFFFF';
+
 
   constructor(public characterService: CharacterService,
               public activatedRoute: ActivatedRoute,
@@ -28,20 +35,19 @@ export class CreateCharComponent implements OnInit{
   public ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.page = params['page'];
+      this.theme = this.characterService.theme;
+      this.race = this.characterService.race;
+      this.type = this.characterService.type;
       if (this.page === this.pages[0]) {
         this.choices = this.characterService.races;
         this.message = this.characterService.firstMessage;
-        console.log(this.characterService.race);
-        this.race = this.charData = this.characterService.race;
+        this.charData = this.characterService.race;
       } else if (this.page === this.pages[1]){
         this.choices = this.characterService.types;
         this.message = this.characterService.secondMessage;
-        this.race = this.characterService.race;
-        this.type = this.charData = this.characterService.type;
+        this.charData = this.characterService.type;
       } else {
         this.message = this.characterService.thirdMessage;
-        this.race = this.characterService.race;
-        this.type = this.characterService.type;
       }
     });
   }
@@ -73,14 +79,19 @@ export class CreateCharComponent implements OnInit{
     }
   }
 
-  public onTheme(key: string){
-
+  public onTheme(theme: string){
+    this.theme = theme;
+    this.characterService.updateTheme(this.theme);
   }
 
   public onStep(stepDirection: boolean){
     const index = this.pages.findIndex(item => item === this.page);
     if(stepDirection) {
       this.setDefaultRace();
+      if(index === this.pages.length - 1){
+        this.router.navigate(['/finish']);
+        return;
+      }
       this.router.navigate(['/creating'], {queryParams: {page: this.pages[index + 1]}});
     } else {
       this.setDefaultType();
