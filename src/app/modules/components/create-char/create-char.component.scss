@@ -1,32 +1,37 @@
 @import 'fonts.scss';
 @import 'images.scss';
 @import 'icons.scss';
+@import 'variables.scss';
+@import 'radio_btn';
 
 .wrapper {
   background-color: #FFFFFF;
   overflow: hidden;
 
   p {
-    font-family: Roboto-Light, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
-    color: #716868;
+    :host-context(.light-theme) & {
+      color: $light_theme_font;
+    }
+
+    :host-context(.dark-theme) & {
+      color: $dark_theme_font;
+    }
   }
 
   button {
     width: 90px;
     height: 36px;
-    background: #93C2ED;
+
+    :host-context(.light-theme) & {
+      background-color: $light_theme_btn_background;
+    }
+
+    :host-context(.dark-theme) & {
+      background-color: $dark_theme_btn_background;
+    }
+
     border: 0 solid transparent;
     padding: 4px 5px 4px 5px;
-
-    p {
-      display: inline;
-      margin: 0 6px 0 6px;
-      color: #FFFFFF;
-    }
   }
 
   .image {
@@ -36,13 +41,50 @@
     background-color: #FFFFFF;
   }
 
+  .advice {
+    position: absolute;
+    width: 295px;
+    top: 13px;
+    right: 13px;
+    padding: 4px 8px;
+    background-color: #EAEBB8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    p {
+      margin: 0;
+      color: $light_theme_font;
+      white-space: pre-line;
+    }
+
+    button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 0 solid transparent;
+      background-color: transparent;
+      background-image: $close;
+      background-size: cover;
+    }
+  }
+
   .message {
     position: absolute;
     width: 414px;
     height: 177px;
     left: 0;
     top: 0;
-    background: #FFF9F9;
+
+    :host-context(.light-theme) & {
+      background-color: $light_theme_panel_background;
+    }
+
+    :host-context(.dark-theme) & {
+      background-color: $dark_theme_panel_background;
+    }
+
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     font-weight: 300;
 
@@ -62,7 +104,7 @@
       margin-bottom: 9px;
     }
 
-    .third-bottom-p {
+    .color-bottom-p {
       margin: 0 177px 0 22px;
       padding: 10px 0 0 0;
     }
@@ -70,7 +112,15 @@
     button {
       width: 90px;
       height: 36px;
-      background: #93C2ED;
+
+      :host-context(.light-theme) & {
+        background-color: $light_theme_btn_background;
+      }
+
+      :host-context(.dark-theme) & {
+        background-color: $dark_theme_btn_background;
+      }
+
       border: 0 solid transparent;
       font-weight: normal;
       font-size: 24px;
@@ -79,7 +129,7 @@
       margin: 0 14px 14px 310px;
     }
 
-    .third-msg-btn {
+    .color-msg-btn {
       position: absolute;
       bottom: 14px;
       right: 14px;
@@ -92,11 +142,19 @@
     top: 473px;
     width: 414px;
     height: 263px;
-    background-color: #FFF9F9;
+
+    :host-context(.light-theme) & {
+      background-color: $light_theme_panel_background;
+    }
+
+    :host-context(.dark-theme) & {
+      background-color: $dark_theme_panel_background;
+    }
+
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
 
     .paragraph-container {
-      padding: 22px 55px 22px 22px;
+      margin: 22px 55px 22px 22px;
 
       p {
         font-weight: 300;
@@ -111,26 +169,16 @@
 
     .character-menu {
       .item-wrapper {
-        padding: 0 0 19px 24px;
-
-        label {
-          font-family: Roboto-Light, sans-serif;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 24px;
-          line-height: 28px;
-          color: #716868;
-          margin-left: 5px;
-        }
+        margin: 0 0 19px 24px;
       }
 
       .next-btn-wrapper {
-        padding: 0 14px 12px 310px;
+        margin: 0 14px 12px 310px;
       }
 
       .next-back-btn-wrapper {
         display: flex;
-        padding: 0 14px 12px 14px;
+        margin: 0 14px 12px 14px;
         justify-content: space-between;
       }
 
@@ -139,6 +187,12 @@
           display: inline-block;
           width: 16px;
           height: 16px;
+        }
+
+        p {
+          display: inline;
+          margin: 0 6px 0 6px;
+          color: #FFFFFF;
         }
 
         .right {
@@ -158,7 +212,15 @@
     top: 344px;
     width: 370px;
     height: 392px;
-    background-color: #FFF9F9;
+
+    :host-context(.light-theme) & {
+      background-color: $light_theme_panel_background;
+    }
+
+    :host-context(.dark-theme) & {
+      background-color: $dark_theme_panel_background;
+    }
+
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.25);
     padding: 22px;
 
@@ -172,16 +234,6 @@
       display: flex;
       margin: 0 141px 14px 0;
       justify-content: space-between;
-
-      label {
-        font-family: Roboto-Light, sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 28px;
-        color: #716868;
-        margin-left: 5px;
-      }
     }
 
     .color-menu {
@@ -202,7 +254,21 @@
             margin: 190px 0 5px 32px;
 
             button {
-              background-image: $save_btn;
+              display: flex;
+              align-items: center;
+
+              .star {
+                display: inline-block;
+                width: 22px;
+                height: 22px;
+                background-image: $star;
+                background-size: cover;
+              }
+
+              p {
+                margin: 0 6px 0 0;
+                color: #FFFFFF;
+              }
             }
           }
         }
@@ -215,44 +281,5 @@
   }
 }
 
-.radio-day, .radio-night {
-  position: relative;
-  height: 16px;
-  width: 16px;
-}
 
-.radio-day::before, .radio-night::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FFFFFF;
-  border: 2px solid #716868;
-}
-
-.radio-day:checked::after, .radio-night:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #716868;
-  transform: translate(-50%, -50%);
-  visibility: visible;
-}
-
-.radio-night::before {
-  background-color: #0C0C08;
-  border: 2px solid #FFFFFF;
-}
-
-.radio-night:checked::after {
-  background-color: #FFFFFF;
-}
 

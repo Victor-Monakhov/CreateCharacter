@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onStart(){
+  public onStart() {
     this.router.navigate(['/creating'], {queryParams: {page: 'race'}});
   }
 }

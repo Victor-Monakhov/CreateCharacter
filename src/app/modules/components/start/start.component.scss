@@ -1,25 +1,10 @@
 @import "fonts.scss";
-.wrapper{
-  background-color: #FFFFFF;
-  hr{
-    margin: 0;
-    width: 275px;
-    height: 0;
-    border: 1px solid #93C2ED;
-  }
-  p{
-    color: #716868;
-    font-family: Roboto-Light, sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 28px;
-    padding: 0;
-    margin: 0;
-  }
-  .slogan{
-    padding: 32px 44px 0 167px;
-    h2{
+
+.wrapper {
+  .slogan {
+    margin: 32px 44px 0 167px;
+
+    h2 {
       width: 203px;
       height: 31px;
       font-family: Volkorn-Italic, sans-serif;
@@ -29,12 +14,15 @@
       margin: 0;
     }
   }
-  .first-hr-wrapper{
-    padding: 55px 69px 0 70px;
+
+  .first-hr-wrapper {
+    margin: 55px 69px 0 70px;
   }
-  .first-paragraph{
-    padding: 3px 44px 0 37px;
-    p{
+
+  .first-paragraph {
+    margin: 3px 44px 0 37px;
+
+    p {
       display: flex;
       flex-direction: column;
       justify-content: end;
@@ -42,32 +30,40 @@
       height: 116px;
     }
   }
-  .second-hr-wrapper{
-    padding: 15px 69px 0 70px;
-    .hr-rotated{
+
+  .second-hr-wrapper {
+    margin: 15px 69px 0 70px;
+
+    .hr-rotated {
       display: inline-block;
       transform: rotate(-4deg);
     }
   }
-  .second-paragraph{
-    padding: 27px 47px 0 43px;
-    p{
+
+  .second-paragraph {
+    margin: 27px 47px 0 43px;
+
+    p {
       width: 324px;
       height: 84px;
     }
   }
-  .third-hr-wrapper{
-    padding: 25px 69px 0 70px;
+
+  .third-hr-wrapper {
+    margin: 25px 69px 0 70px;
   }
-  .start-btn-wrapper{
-    padding: 58px 96px 0 88px;
-    .start-btn{
+
+  .start-btn-wrapper {
+    margin: 58px 96px 0 88px;
+
+    .start-btn {
       width: 230px;
       height: 75px;
       background-color: #93C2ED;
       padding: 16px 38px 17px 39px;
       border: 0 solid transparent;
-      p{
+
+      p {
         font-weight: normal;
         font-size: 36px;
         line-height: 42px;

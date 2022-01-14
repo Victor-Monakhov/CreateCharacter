@@ -1,6 +1,4 @@
-import { Injectable } from '@angular/core';
-import {map, Observable, of, switchMap} from "rxjs";
-import {Params} from "@angular/router";
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +8,17 @@ export class CharacterService {
   public images: Map<string, string> = new Map();
   public races: string[] = ['Human', 'Elf', 'Dwarf'];
   public types: string[] = ['Warrior', 'Dude with bow', 'Mage'];
-  public firstMessage: boolean;
-  public secondMessage: boolean;
-  public thirdMessage: boolean;
+  public raceMessage: boolean;
+  public classMessage: boolean;
+  public colorMessage: boolean;
   public theme: string;
   public race: string;
   public type: string;
-  public readonly firstMessageKey: string = 'firstMessage';
-  public readonly secondMessageKey: string = 'secondMessage';
-  public readonly thirdMessageKey: string = 'thirdMessage';
+  public charBackground: string;
+  public readonly raceMessageKey: string = 'raceMessage';
+  public readonly classMessageKey: string = 'classMessage';
+  public readonly colorMessageKey: string = 'colorMessage';
+  public readonly charBackgroundKey: string = 'charBackground';
   public readonly themeKey: string = 'theme';
   public readonly raceKey: string = 'race';
   public readonly typeKey: string = 'type';
@@ -26,15 +26,16 @@ export class CharacterService {
 
   constructor() {
     this.imagesInit();
-    this.firstMessage = !!JSON.parse(window.localStorage.getItem(this.firstMessageKey) as string);
-    this.secondMessage = !!JSON.parse(window.localStorage.getItem(this.secondMessageKey) as string);
-    this.thirdMessage = !!JSON.parse(window.localStorage.getItem(this.thirdMessageKey) as string);
+    this.raceMessage = !!JSON.parse(window.localStorage.getItem(this.raceMessageKey) as string);
+    this.classMessage = !!JSON.parse(window.localStorage.getItem(this.classMessageKey) as string);
+    this.colorMessage = !!JSON.parse(window.localStorage.getItem(this.colorMessageKey) as string);
     this.race = JSON.parse(window.localStorage.getItem(this.raceKey) as string) ?? 'Human';
     this.type = JSON.parse(window.localStorage.getItem(this.typeKey) as string) ?? '';
     this.theme = JSON.parse(window.localStorage.getItem(this.themeKey) as string) ?? "Day";
+    this.charBackground = JSON.parse(window.localStorage.getItem(this.charBackgroundKey) as string) ?? '#FFFFFF';
   }
 
-  private imagesInit(){
+  private imagesInit() {
     this.images.set('Human', '1563214703920.png');
     this.images.set('HumanWarrior', '1563214718531.png');
     this.images.set('HumanDude with bow', '1563214729859.png');
@@ -49,39 +50,45 @@ export class CharacterService {
     this.images.set('DwarfMage', '1563214820031.png');
   }
 
-  public updateFirstMessage(){
-    this.firstMessage = true;
-    window.localStorage.removeItem(this.firstMessageKey);
-    window.localStorage.setItem(this.firstMessageKey, JSON.stringify(this.firstMessage));
+  public updateRaceMessage() {
+    this.raceMessage = true;
+    window.localStorage.removeItem(this.raceMessageKey);
+    window.localStorage.setItem(this.raceMessageKey, JSON.stringify(this.raceMessage));
   }
 
-  public updateSecondMessage(){
-    this.secondMessage = true;
-    window.localStorage.removeItem(this.secondMessageKey);
-    window.localStorage.setItem(this.secondMessageKey, JSON.stringify(this.secondMessage));
+  public updateClassMessage() {
+    this.classMessage = true;
+    window.localStorage.removeItem(this.classMessageKey);
+    window.localStorage.setItem(this.classMessageKey, JSON.stringify(this.classMessage));
   }
 
-  public updateThirdMessage(){
-    this.thirdMessage = true;
-    window.localStorage.removeItem(this.thirdMessageKey);
-    window.localStorage.setItem(this.thirdMessageKey, JSON.stringify(this.thirdMessage));
+  public updateColorMessage() {
+    this.colorMessage = true;
+    window.localStorage.removeItem(this.colorMessageKey);
+    window.localStorage.setItem(this.colorMessageKey, JSON.stringify(this.colorMessage));
   }
 
-  public updateTheme(theme: string){
+  public updateTheme(theme: string) {
     this.theme = theme;
     window.localStorage.removeItem(this.themeKey);
     window.localStorage.setItem(this.themeKey, JSON.stringify(this.theme));
   }
 
-  public updateRace(race: string){
+  public updateRace(race: string) {
     this.race = race;
     window.localStorage.removeItem(this.raceKey);
     window.localStorage.setItem(this.raceKey, JSON.stringify(this.race));
   }
 
-  public updateType(type: string){
+  public updateType(type: string) {
     this.type = type;
     window.localStorage.removeItem(this.typeKey);
     window.localStorage.setItem(this.typeKey, JSON.stringify(this.type));
+  }
+
+  public updateCharBackground(color: string) {
+    this.charBackground = color;
+    window.localStorage.removeItem(this.charBackgroundKey);
+    window.localStorage.setItem(this.charBackgroundKey, JSON.stringify(this.charBackground));
   }
 }

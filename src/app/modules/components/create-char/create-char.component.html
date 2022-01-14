@@ -1,12 +1,15 @@
 <div class="wrapper">
   <ng-container *ngIf="(page === pages[0] && !message)">
-    <ng-container *ngTemplateOutlet="firstMessage"></ng-container>
+    <ng-container *ngTemplateOutlet="raceMessage"></ng-container>
   </ng-container>
   <ng-container *ngIf="(page === pages[1] && !message)">
-    <ng-container *ngTemplateOutlet="secondMessage"></ng-container>
+    <ng-container *ngTemplateOutlet="classMessage"></ng-container>
   </ng-container>
   <ng-container *ngIf="(page === pages[2] && !message)">
-    <ng-container *ngTemplateOutlet="thirdMessage"></ng-container>
+    <ng-container *ngTemplateOutlet="colorMessage"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="isAdvice">
+    <ng-container *ngTemplateOutlet="advice"></ng-container>
   </ng-container>
   <img class="image"
        src="../../assets/images/{{images.get(race + type)}}"
@@ -14,11 +17,9 @@
        [style.background]="charBackground"
        [ngStyle]="race === 'Human' ? {'margin-left': '-5px'} : {'margin-left': '-20px'}">
   <div *ngIf="page !== pages[2]; else colorPanel"
-       class="choice-panel"
-       [ngStyle]="theme === 'Day' ? {'background-color': dayBackground} : {'background-color': nightBackground}">
+       class="choice-panel">
     <div class="paragraph-container">
-      <p
-        [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+      <p>
         Chose a <strong>{{page}}</strong> from the options:
       </p>
     </div>
@@ -31,8 +32,7 @@
                [name]="item"
                [id]="item"
                (click)="onRadio(item)">
-        <label [for]="item"
-               [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+        <label [for]="item">
           {{item}}
         </label>
       </div>
@@ -48,23 +48,19 @@
 
 
 <ng-template #colorPanel>
-  <div class="color-panel"
-       [ngStyle]="theme === 'Day' ? {'background-color': dayBackground} : {'background-color': nightBackground}">
-    <p class="theme-p"
-       [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+  <div class="color-panel">
+    <p class="theme-p">
       Theme:
     </p>
     <div class="themes">
       <div class="theme-day" *ngFor="let item of themes">
         <input type="radio"
-               [ngClass]="theme === 'Day' ? 'radio-day' : 'radio-night'"
                [name]="item"
                [id]="item"
                [disabled]="!message"
                [checked]="item === theme"
                (click)="onTheme(item)">
-        <label [for]="item"
-               [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">
+        <label [for]="item">
           {{item}}
         </label>
       </div>
@@ -72,49 +68,59 @@
     <div class="color-menu">
       <div class="background">
         <div class="save-p">
-          <p [ngStyle]="theme === 'Day' ? {'color': dayFont} : {'color': nightFont}">Background:</p>
+          <p>Background:</p>
           <div class="save-btn-wrapper">
-            <button [disabled]="!message" (click)="onStep(true)"></button>
+            <button [disabled]="!message" (click)="onStep(true)">
+              <p>Save</p>
+              <div class="star"></div>
+            </button>
           </div>
         </div>
         <div class="color-picker"
-               [cpWidth]="'191px'"
-               [cpHeight]="'257px'"
-               [cpDisableInput]="true"
-               [cpToggle] = "true"
-               [cpAlphaChannel]="'disabled'"
-               [cpDialogDisplay]="'inline'"
-               [cpCloseClickOutside]="false"
-               [(colorPicker)]="charBackground">
+             [cpWidth]="'191px'"
+             [cpHeight]="'180px'"
+             [cpDisableInput]="true"
+             [cpToggle]="true"
+             [cpAlphaChannel]="'disabled'"
+             [cpDialogDisplay]="'inline'"
+             [cpCloseClickOutside]="false"
+             [(colorPicker)]="charBackground">
         </div>
       </div>
     </div>
   </div>
 </ng-template>
 
-<ng-template #firstMessage>
+<ng-template #raceMessage>
   <div class="message">
     <p class="top-p">The first:</p>
     <p class="bold-p">Race</p>
     <p class="bottom-p">Everyone is crazy about it now...</p>
-    <button (click)="onFirstMessage()">Got it</button>
+    <button (click)="onRaceMessage()">Got it</button>
   </div>
 </ng-template>
 
-<ng-template #secondMessage>
+<ng-template #classMessage>
   <div class="message">
     <p class="top-p">The second:</p>
     <p class="bold-p">Class</p>
     <p class="bottom-p">Second but not least...</p>
-    <button (click)="onSecondMessage()">Got it</button>
+    <button (click)="onClassMessage()">Got it</button>
   </div>
 </ng-template>
 
-<ng-template #thirdMessage>
+<ng-template #colorMessage>
   <div class="message">
     <p class="top-p">Okay, glad we both chose a {{type.toLowerCase()}} {{race.toLowerCase()}}:3</p>
-    <p class="third-bottom-p">Left a little <br> just choose <strong>settings</strong></p>
-    <button  class="third-msg-btn" (click)="onThirdMessage()">Got it</button>
+    <p class="color-bottom-p">Left a little <br> just choose <strong>settings</strong></p>
+    <button class="color-msg-btn" (click)="onColorMessage()">Got it</button>
+  </div>
+</ng-template>
+
+<ng-template #advice>
+  <div class="advice">
+    <p class="advice-p">{{advices.get(charData)}}</p>
+    <button (click)="onAdviceClose()"></button>
   </div>
 </ng-template>
 
@@ -124,7 +130,7 @@
       <div class="arrow left"></div>
       <p>Back</p>
     </button>
-    <button [disabled]="!message"  (click)="onStep(true)">
+    <button [disabled]="!message" (click)="onStep(true)">
       <p>Next</p>
       <div class="arrow right"></div>
     </button>

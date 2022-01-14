@@ -4,10 +4,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-char',
+  host: {
+    "[class.light-theme]": "(theme === 'Day')",
+    "[class.dark-theme]": "(theme === 'Night')"
+  },
   templateUrl: './create-char.component.html',
   styleUrls: ['./create-char.component.scss']
 })
-export class CreateCharComponent implements OnInit{
+export class CreateCharComponent implements OnInit {
 
   public images: Map<string, string>;
   public page: string = 'race';
@@ -16,20 +20,23 @@ export class CreateCharComponent implements OnInit{
   public charData: string = '';
   public race: string = 'Human';
   public type: string = ''
-  public readonly pages: string[] = ['race', 'class', 'color'];
   public themes: string[] = ['Day', 'Night'];
   public theme: string = 'Day';
+  public isAdvice: boolean = false;
   public charBackground: string = '#FFFFFF';
-  public dayBackground: string = '#FFF9F9';
-  public nightBackground: string = '#0C0C08';
-  public dayFont: string = '#716868';
-  public nightFont: string = '#FFFFFF';
-
+  public advices: Map<string, string> = new Map();
+  public readonly pages: string[] = ['race', 'class', 'color'];
 
   constructor(public characterService: CharacterService,
               public activatedRoute: ActivatedRoute,
               public router: Router) {
     this.images = characterService.images;
+    this.advices.set('Human', 'Seriously?\nHuman?\nYou are human in real life...');
+    this.advices.set('Elf', 'Elf?\nAre you gay?');
+    this.advices.set('Dwarf', 'Good choice.');
+    this.advices.set('Warrior', 'Original');
+    this.advices.set('Dude with bow', 'Classic');
+    this.advices.set('Mage', 'LOL really?');
   }
 
   public ngOnInit(): void {
@@ -38,57 +45,65 @@ export class CreateCharComponent implements OnInit{
       this.theme = this.characterService.theme;
       this.race = this.characterService.race;
       this.type = this.characterService.type;
+      this.charBackground = this.characterService.charBackground;
       if (this.page === this.pages[0]) {
         this.choices = this.characterService.races;
-        this.message = this.characterService.firstMessage;
+        this.message = this.characterService.raceMessage;
         this.charData = this.characterService.race;
-      } else if (this.page === this.pages[1]){
+      } else if (this.page === this.pages[1]) {
         this.choices = this.characterService.types;
-        this.message = this.characterService.secondMessage;
+        this.message = this.characterService.classMessage;
         this.charData = this.characterService.type;
       } else {
-        this.message = this.characterService.thirdMessage;
+        this.message = this.characterService.colorMessage;
       }
     });
   }
 
-  public onFirstMessage(){
-    this.characterService.updateFirstMessage();
-    this.message = this.characterService.firstMessage;
+  public onRaceMessage() {
+    this.characterService.updateRaceMessage();
+    this.message = this.characterService.raceMessage;
   }
 
-  public onSecondMessage(){
-    this.characterService.updateSecondMessage();
-    this.message = this.characterService.secondMessage;
+  public onClassMessage() {
+    this.characterService.updateClassMessage();
+    this.message = this.characterService.classMessage;
   }
 
-  public onThirdMessage(){
-    this.characterService.updateThirdMessage();
-    this.message = this.characterService.thirdMessage;
+  public onColorMessage() {
+    this.characterService.updateColorMessage();
+    this.message = this.characterService.colorMessage;
   }
 
-  public onRadio(charData: string){
+  public onAdviceClose() {
+    this.isAdvice = false;
+  }
+
+  public onRadio(charData: string) {
     this.charData = charData;
     if (this.page === this.pages[0]) {
       this.race = charData;
       this.characterService.updateRace(charData);
-    } else if (this.page === this.pages[1]){
+      this.isAdvice = true;
+    } else if (this.page === this.pages[1]) {
       this.type = charData;
       this.characterService.updateType(charData);
-    } else {
+      this.isAdvice = true;
     }
   }
 
-  public onTheme(theme: string){
+  public onTheme(theme: string) {
     this.theme = theme;
     this.characterService.updateTheme(this.theme);
   }
 
-  public onStep(stepDirection: boolean){
+  public onStep(stepDirection: boolean) {
+    this.isAdvice = false;
     const index = this.pages.findIndex(item => item === this.page);
-    if(stepDirection) {
+    if (stepDirection) {
       this.setDefaultRace();
-      if(index === this.pages.length - 1){
+      if (index === this.pages.length - 1) {
+        this.characterService.updateCharBackground(this.charBackground);
         this.router.navigate(['/finish']);
         return;
       }
@@ -99,15 +114,15 @@ export class CreateCharComponent implements OnInit{
     }
   }
 
-  private setDefaultRace(){
-    if(this.page === this.pages[0]){
+  private setDefaultRace() {
+    if (this.page === this.pages[0]) {
       this.type = 'Warrior';
       this.characterService.updateType('Warrior');
     }
   }
 
-  private setDefaultType(){
-    if(this.page === this.pages[1]) {
+  private setDefaultType() {
+    if (this.page === this.pages[1]) {
       this.type = '';
       this.characterService.updateType('');
     }

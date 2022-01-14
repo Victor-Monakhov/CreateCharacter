@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CharacterService} from "../../../shared/services/character.service";
 
@@ -9,11 +9,13 @@ import {CharacterService} from "../../../shared/services/character.service";
 })
 export class FinishComponent implements OnInit {
 
-  constructor(public router: Router, public characterService: CharacterService) { }
+  constructor(public router: Router, public characterService: CharacterService) {
+  }
 
   ngOnInit(): void {
   }
-  public onAgain(){
+
+  public onAgain() {
     this.characterService.updateRace('Human');
     this.characterService.updateType('');
     this.router.navigate(['/']);

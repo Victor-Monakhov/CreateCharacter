@@ -1,12 +1,14 @@
 @import "icons.scss";
-body{
+
+body {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-.logo{
+.logo {
   margin: 6px 41px 0 41px;
+
   h1 {
     width: 332px;
     height: 89px;
@@ -22,31 +24,52 @@ body{
   }
 }
 
+hr {
+  margin: 0;
+  width: 275px;
+  height: 0;
+  border: 1px solid #93C2ED;
+}
+
+p {
+  color: #716868;
+  font-family: Roboto-Light, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  padding: 0;
+  margin: 0;
+}
 
 color-picker {
-  .color-picker{
+  .color-picker {
     border: 0 solid transparent;
-    .saturation-lightness{
+
+    .saturation-lightness {
       display: inline-block;
-      //height: 217px;
-      .cursor{
+
+      .cursor {
         border-color: #FFFFFF;
         height: 12px;
         width: 12px;
       }
     }
-    .selected-color-background, .selected-color{
+
+    .selected-color-background, .selected-color {
       display: none;
     }
-    .hue-alpha{
-      position: absolute;
+
+    .hue-alpha {
+      position: static;
       margin: 0;
       padding: 2px;
-      top: 217px;
-      .left>div{
+
+      .left > div {
         display: none;
       }
-      .left{
+
+      .left {
         display: flex;
         flex-direction: column;
         justify-content: end;
@@ -57,20 +80,24 @@ color-picker {
         background-size: cover;
         padding: 0;
       }
-      .right>div:first-child{
+
+      .right > div:first-child {
         display: none;
       }
-      .right{
+
+      .right {
         display: flex;
         align-items: center;
         height: 36px;
         width: 147px;
         padding: 0;
-        .hue{
+
+        .hue {
           margin: 0;
           height: 12px;
           border-radius: 10px;
-          .cursor{
+
+          .cursor {
             border-color: #FFFFFF;
             height: 12px;
             width: 12px;
