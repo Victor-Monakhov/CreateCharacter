@@ -60,26 +60,26 @@ export class CreateCharComponent implements OnInit {
     });
   }
 
-  public onRaceMessage() {
+  public onRaceMessage(): void {
     this.characterService.updateRaceMessage();
     this.message = this.characterService.raceMessage;
   }
 
-  public onClassMessage() {
+  public onClassMessage(): void {
     this.characterService.updateClassMessage();
     this.message = this.characterService.classMessage;
   }
 
-  public onColorMessage() {
+  public onColorMessage(): void {
     this.characterService.updateColorMessage();
     this.message = this.characterService.colorMessage;
   }
 
-  public onAdviceClose() {
+  public onAdviceClose(): void {
     this.isAdvice = false;
   }
 
-  public onRadio(charData: string) {
+  public onRadio(charData: string): void {
     this.charData = charData;
     if (this.page === this.pages[0]) {
       this.race = charData;
@@ -92,12 +92,12 @@ export class CreateCharComponent implements OnInit {
     }
   }
 
-  public onTheme(theme: string) {
+  public onTheme(theme: string): void {
     this.theme = theme;
     this.characterService.updateTheme(this.theme);
   }
 
-  public onStep(stepDirection: boolean) {
+  public onStep(stepDirection: boolean): void {
     this.isAdvice = false;
     const index = this.pages.findIndex(item => item === this.page);
     if (stepDirection) {
@@ -114,14 +114,14 @@ export class CreateCharComponent implements OnInit {
     }
   }
 
-  private setDefaultRace() {
+  private setDefaultRace(): void {
     if (this.page === this.pages[0]) {
       this.type = 'Warrior';
       this.characterService.updateType('Warrior');
     }
   }
 
-  private setDefaultType() {
+  private setDefaultType(): void {
     if (this.page === this.pages[1]) {
       this.type = '';
       this.characterService.updateType('');

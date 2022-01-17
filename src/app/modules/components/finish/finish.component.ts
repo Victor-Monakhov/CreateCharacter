@@ -15,7 +15,7 @@ export class FinishComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onAgain() {
+  public onAgain(): void {
     this.characterService.updateRace('Human');
     this.characterService.updateType('');
     this.router.navigate(['/']);

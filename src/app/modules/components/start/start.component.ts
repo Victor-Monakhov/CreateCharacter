@@ -14,7 +14,7 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public onStart() {
+  public onStart(): void {
     this.router.navigate(['/creating'], {queryParams: {page: 'race'}});
   }
 }
